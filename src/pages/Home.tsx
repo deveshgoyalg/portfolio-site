@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const marqueeItems = [
@@ -8,6 +9,8 @@ const marqueeItems = [
 const featuredWork = [
     { title: 'Cinematic Travel Vlog', category: 'Long Form', subtitle: 'Travel • Documentary', image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=900&q=80' },
     { title: 'Brand Story Documentary', category: 'Long Form', subtitle: 'Brand • Film', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=900&q=80' },
+    { title: 'Fashion Campaign', category: 'Short Form', subtitle: 'Fashion • Social', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=900&q=80' },
+    { title: 'Music Video Teaser', category: 'Short Form', subtitle: 'Music • Motion', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80' },
 ];
 
 const testimonials = [
@@ -23,26 +26,55 @@ const processSteps = [
     { step: '04', title: 'Delivery', desc: 'Final review, revisions, and delivery in all formats you need — social, web, broadcast.' },
 ];
 
+const services = [
+    { num: '01', title: 'Long Form Editing', desc: 'Documentaries, vlogs, YouTube videos, corporate films — narrative-driven content with cinematic quality.', icon: '🎬' },
+    { num: '02', title: 'Short Form Content', desc: 'Reels, TikToks, Shorts — punchy, scroll-stopping edits optimized for algorithms and engagement.', icon: '⚡' },
+    { num: '03', title: 'Motion Graphics', desc: 'Custom intros, lower thirds, animated logos, kinetic typography, and data visualizations.', icon: '✨' },
+    { num: '04', title: 'Color Grading', desc: 'Professional color science and LUT development to give your footage a distinctive cinematic look.', icon: '🎨' },
+    { num: '05', title: 'Sound Design', desc: 'Audio mixing, sound effects, music selection, and voiceover integration for immersive experiences.', icon: '🎧' },
+    { num: '06', title: 'Content Strategy', desc: 'Platform-specific optimization, series planning, and content calendars to grow your audience.', icon: '📊' },
+];
+
+const tools = [
+    { icon: '🎬', name: 'Premiere Pro' },
+    { icon: '✨', name: 'After Effects' },
+    { icon: '🎨', name: 'DaVinci Resolve' },
+    { icon: '🧊', name: 'Cinema 4D' },
+    { icon: '🖼️', name: 'Photoshop' },
+];
+
+const brands = ['YouTube Creators', 'Warpspeed', 'Vibe Media', 'Neon Studios', 'FluxDigital'];
+
+const faqs = [
+    { q: 'What is your typical turnaround time?', a: 'Most projects are completed within 5–10 business days, depending on complexity. Rush deliveries are also available for urgent timelines.' },
+    { q: 'What file formats do you deliver in?', a: 'I deliver in all major formats — MP4, MOV, ProRes, and can optimize for any platform including YouTube, Instagram, TikTok, and broadcast.' },
+    { q: 'Do you offer revision rounds?', a: 'Yes! Every project includes 2 revision rounds. Additional revisions can be discussed based on scope.' },
+    { q: 'Can you work with raw footage from any camera?', a: 'Absolutely. I work with footage from RED, ARRI, Blackmagic, Sony, Canon, DJI drones, and smartphones.' },
+    { q: 'Do you handle music licensing?', a: 'I can source royalty-free music or work with your licensed tracks. I also partner with music libraries for premium selections.' },
+];
+
 const Home = () => {
+    const [openFaq, setOpenFaq] = useState<number | null>(null);
+
     return (
         <>
             {/* ===== HERO ===== */}
-            <section className="hero">
-                <div className="container">
+            <section className="hero grain">
+                <div className="container" style={{ textAlign: 'center' }}>
                     <div className="fade-in">
-                        <div className="hero__badge">
+                        <div className="hero__badge" style={{ display: 'inline-flex' }}>
                             Available for Projects
                         </div>
                     </div>
 
-                    <h1 className="hero__title fade-in delay-1">
-                        Crafting<br />
-                        <span>Visual</span><br />
-                        Stories
-                    </h1>
+                    <div className="hero__massive-text fade-in delay-1">
+                        <div className="outline">DEVESH</div>
+                        <div className="accent">CREATIVE</div>
+                        <div>EDITOR</div>
+                    </div>
 
                     <p className="hero__desc fade-in delay-2">
-                        Video editor & motion graphics artist specializing in high-energy content
+                        Video editor &amp; motion graphics artist specializing in high-energy content
                         that captures attention and drives engagement. From cinematic long-form
                         to viral short-form.
                     </p>
@@ -54,6 +86,12 @@ const Home = () => {
                         <Link to="/portfolio#contact" className="btn-secondary">
                             Get in Touch
                         </Link>
+                    </div>
+
+                    <div className="hero__services fade-in delay-4">
+                        {['Video Editing', 'Motion Graphics', 'Color Grading', 'Sound Design'].map((s) => (
+                            <span className="hero__service-tag" key={s}>{s}</span>
+                        ))}
                     </div>
                 </div>
 
@@ -98,24 +136,51 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* ===== SHOWREEL ===== */}
+            <section className="showreel-section">
+                <div className="container">
+                    <div className="section-header fade-in" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 48px' }}>
+                        <div className="section-label" style={{ justifyContent: 'center' }}>Showreel</div>
+                        <h2 className="section-title">See It In Action</h2>
+                    </div>
+
+                    <div className="showreel-wrap fade-in delay-1">
+                        <img
+                            src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1200&q=80"
+                            alt="Showreel thumbnail"
+                        />
+                        <div className="showreel-overlay">
+                            <div className="showreel-play">▶</div>
+                            <div className="showreel-label">Watch Showreel</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== BRANDS ===== */}
+            <div className="brands-section">
+                <div className="container">
+                    <div className="brands-label">Trusted By</div>
+                    <div className="brands-grid">
+                        {brands.map((brand) => (
+                            <div className="brand-item" key={brand}>{brand}</div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
             {/* ===== WHAT I DO ===== */}
             <section className="section">
                 <div className="container">
                     <div className="section-header fade-in">
-                        <div className="section-label">Services</div>
+                        <div className="section-label">Capabilities</div>
                         <h2 className="section-title">What I Do</h2>
                     </div>
 
                     <div className="services-grid">
-                        {[
-                            { title: 'Long Form Editing', desc: 'Documentaries, vlogs, YouTube videos, corporate films — narrative-driven content with cinematic quality.', icon: '🎬' },
-                            { title: 'Short Form Content', desc: 'Reels, TikToks, Shorts — punchy, scroll-stopping edits optimized for algorithms and engagement.', icon: '⚡' },
-                            { title: 'Motion Graphics', desc: 'Custom intros, lower thirds, animated logos, kinetic typography, and data visualizations.', icon: '✨' },
-                            { title: 'Color Grading', desc: 'Professional color science and LUT development to give your footage a distinctive cinematic look.', icon: '🎨' },
-                            { title: 'Sound Design', desc: 'Audio mixing, sound effects, music selection, and voiceover integration for immersive experiences.', icon: '🎧' },
-                            { title: 'Content Strategy', desc: 'Platform-specific optimization, series planning, and content calendars to grow your audience.', icon: '📊' },
-                        ].map((service, i) => (
+                        {services.map((service, i) => (
                             <div key={i} className={`service-card fade-in delay-${(i % 5) + 1}`}>
+                                <div className="service-card__number">{service.num}</div>
                                 <div className="service-card__icon">{service.icon}</div>
                                 <div className="service-card__content">
                                     <h3 className="service-card__title">{service.title}</h3>
@@ -126,6 +191,19 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* ===== RED MARQUEE (Zayla-style) ===== */}
+            <div className="marquee marquee--red">
+                <div className="marquee__inner">
+                    {[...Array(4)].map((_, repeat) => (
+                        ['SELECTED WORK', 'PORTFOLIO', 'CASE STUDIES'].map((item, i) => (
+                            <span className="marquee__item" key={`red-${repeat}-${i}`}>
+                                <span>✦</span> {item}
+                            </span>
+                        ))
+                    ))}
+                </div>
+            </div>
 
             {/* ===== FEATURED WORK ===== */}
             <section className="section">
@@ -200,8 +278,27 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ===== PROCESS ===== */}
+            {/* ===== TOOLS SECTION ===== */}
             <section className="section">
+                <div className="container">
+                    <div className="section-header fade-in" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 48px' }}>
+                        <div className="section-label" style={{ justifyContent: 'center' }}>Arsenal</div>
+                        <h2 className="section-title">Tools I Use</h2>
+                    </div>
+
+                    <div className="tools-grid">
+                        {tools.map((tool, i) => (
+                            <div key={i} className={`tool-card fade-in delay-${i + 1}`}>
+                                <div className="tool-card__icon">{tool.icon}</div>
+                                <div className="tool-card__name">{tool.name}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== PROCESS ===== */}
+            <section className="section grain">
                 <div className="container">
                     <div className="section-header fade-in" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 56px' }}>
                         <div className="section-label" style={{ justifyContent: 'center' }}>Workflow</div>
@@ -248,6 +345,30 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* ===== FAQ ===== */}
+            <section className="section">
+                <div className="container">
+                    <div className="section-header fade-in" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 48px' }}>
+                        <div className="section-label" style={{ justifyContent: 'center' }}>FAQ</div>
+                        <h2 className="section-title">Common Questions</h2>
+                    </div>
+
+                    <div className="faq-grid">
+                        {faqs.map((faq, i) => (
+                            <div key={i} className={`faq-item ${openFaq === i ? 'faq-item--open' : ''} fade-in delay-${(i % 5) + 1}`}>
+                                <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                                    {faq.q}
+                                    <span className="faq-toggle">+</span>
+                                </button>
+                                <div className="faq-answer">
+                                    <p className="faq-answer__text">{faq.a}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* ===== MARQUEE 2 ===== */}
             <div className="marquee">
                 <div className="marquee__inner">
@@ -262,10 +383,10 @@ const Home = () => {
             </div>
 
             {/* ===== CTA ===== */}
-            <section className="cta-section">
+            <section className="cta-section grain">
                 <div className="container">
                     <div className="cta-content fade-in">
-                        <h2 className="cta-title">Ready to Create<br />Something Amazing?</h2>
+                        <h2 className="cta-title">Ready to Create<br /><span className="gradient-text">Something Amazing?</span></h2>
                         <p className="cta-desc">
                             Let's bring your vision to life. Whether it's a brand film, social campaign,
                             or creative project — I'm ready to make it happen.

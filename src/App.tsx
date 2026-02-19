@@ -17,7 +17,13 @@ function App() {
                 <div className="container">
                     <div className="footer__inner">
                         <div className="footer__logo">devesh<span>.</span></div>
-                        <div className="footer__text">© 2024 Devesh. All rights reserved.</div>
+                        <div className="footer__links">
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="footer__link">YouTube</a>
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer__link">Instagram</a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="footer__link">Twitter</a>
+                            <a href="mailto:hello@devesh.com" className="footer__link">Email</a>
+                        </div>
+                        <div className="footer__text">© 2025 Devesh. All rights reserved.</div>
                     </div>
                 </div>
             </footer>
