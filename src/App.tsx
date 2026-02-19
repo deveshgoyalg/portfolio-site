@@ -1,36 +1,24 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Portfolio from './pages/Portfolio';
-import Presets from './pages/Presets';
-import { AnimatePresence } from 'framer-motion';
-
-function AnimatedRoutes() {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/presets" element={<Presets />} />
-      </Routes>
-    </AnimatePresence>
-  );
-}
+import IntroSection from './components/IntroSection';
+import ClientWork from './components/ClientWork';
+import Resources from './components/Resources';
+import ContactCTA from './components/ContactCTA';
 
 function App() {
   return (
-    <Router basename="/portfolio-site">
-      <div className="bg-black min-h-screen text-slate-50 font-sans selection:bg-acid-green/30">
-        <Navbar />
-        <AnimatedRoutes />
+    <div className="bg-surface text-primary min-h-screen">
+      {/* Film Grain Overlay */}
+      <div className="grain-overlay" aria-hidden="true"></div>
+      {/* Vignette */}
+      <div className="vignette" aria-hidden="true"></div>
 
-        <footer className="py-8 text-center text-slate-600 text-sm">
-          <p>© {new Date().getFullYear()} Devesh. All rights reserved.</p>
-        </footer>
-      </div>
-    </Router>
+      {/* Scroll-Driven Intro */}
+      <IntroSection />
+
+      {/* Post-Intro Sections */}
+      <ClientWork />
+      <Resources />
+      <ContactCTA />
+    </div>
   );
 }
 
