@@ -21,8 +21,8 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <Router>
-      <div className="bg-slate-900 min-h-screen text-slate-50 font-sans selection:bg-blue-500/30">
+    <Router basename="/portfolio-site">
+      <div className="bg-black min-h-screen text-slate-50 font-sans selection:bg-acid-green/30">
         <Navbar />
         <AnimatedRoutes />
 
