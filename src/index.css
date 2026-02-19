@@ -2,8 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  scroll-behavior: smooth;
-  background-color: #0f172a; /* Slate 900 for dark theme */
-  color: #f8fafc; /* Slate 50 for text */
+:root {
+  --border-color: rgba(255, 255, 255, 0.2);
+}
+
+html,
+body {
+  background-color: #050505;
+  color: #f0f0f0;
+  font-family: 'JetBrains Mono', monospace;
+  /* Default to mono for technical feel */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border: 1px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ccff00;
+}
+
+/* Utilities */
+.industrial-border {
+  border: 1px solid var(--border-color);
+}
+
+.industrial-grid {
+  background-image:
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
 }

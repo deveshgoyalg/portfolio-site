@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Video, Layers, Mail } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -8,71 +8,80 @@ const Navbar = () => {
     const location = useLocation();
 
     const links = [
-        { name: 'Home', path: '/', icon: <Video className="w-4 h-4" /> },
-        { name: 'Portfolio', path: '/portfolio', icon: <Layers className="w-4 h-4" /> },
-        { name: 'Presets', path: '/presets', icon: <Layers className="w-4 h-4" /> }, // Using Layers as placeholder
-        { name: 'Contact', path: '/portfolio#contact', icon: <Mail className="w-4 h-4" /> },
+        { name: 'HOME', path: '/' },
+        { name: 'WORK', path: '/portfolio' },
+        { name: 'ASSETS', path: '/presets' },
+        { name: 'CONTACT', path: '/portfolio#contact' },
     ];
 
     const isActive = (path: string) => location.pathname === path;
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-            <div className="max-w-7xl mx-auto backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl px-6 py-3 flex justify-between items-center shadow-lg">
-                <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-                    DEVESH.
-                </Link>
+        <>
+            {/* Top Protocol Bar */}
+            <div className="fixed top-0 left-0 right-0 h-2 bg-acid-green z-50"></div>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex gap-8 items-center">
-                    {links.map((link) => (
-                        <Link
-                            key={link.name}
-                            to={link.path}
-                            className={`flex items-center gap-2 transition-colors duration-300 ${isActive(link.path) ? 'text-blue-400' : 'text-gray-300 hover:text-white'
-                                }`}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
+            <nav className="fixed top-2 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/20">
+                <div className="flex justify-between items-stretch h-16">
+
+                    {/* Logo Section */}
+                    <Link to="/" className="flex items-center px-6 border-r border-white/20 hover:bg-white/5 transition-colors group">
+                        <span className="font-heading font-bold text-3xl tracking-tighter text-white group-hover:text-acid-green transition-colors">
+                            DEVESH<span className="text-acid-green">.</span>
+                        </span>
+                    </Link>
+
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex flex-1 justify-end">
+                        {links.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.path}
+                                className={`flex items-center px-8 border-l border-white/20 font-mono text-sm tracking-wider hover:bg-white/5 hover:text-acid-green transition-all relative group ${isActive(link.path) ? 'text-acid-green bg-white/5' : 'text-gray-400'
+                                    }`}
+                            >
+                                {link.name}
+                                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-acid-green transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="md:hidden px-6 border-l border-white/20 text-white hover:bg-white/5 hover:text-acid-green transition-colors"
+                    >
+                        {isOpen ? <X /> : <Menu />}
+                    </button>
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition"
-                >
-                    {isOpen ? <X /> : <Menu />}
-                </button>
-            </div>
-
-            {/* Mobile Menu Dropdown */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-20 left-6 right-6 md:hidden backdrop-blur-xl bg-slate-900/90 border border-white/10 rounded-2xl p-4 shadow-2xl"
-                    >
-                        <div className="flex flex-col gap-4">
-                            {links.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    to={link.path}
-                                    onClick={() => setIsOpen(false)}
-                                    className={`flex items-center gap-3 p-3 rounded-lg transition-colors ${isActive(link.path) ? 'bg-white/10 text-blue-400' : 'text-gray-300 hover:bg-white/5'
-                                        }`}
-                                >
-                                    {link.icon}
-                                    {link.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
+                {/* Mobile Menu Dropdown */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="md:hidden border-b border-white/20 bg-black overflow-hidden"
+                        >
+                            <div className="flex flex-col">
+                                {links.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        to={link.path}
+                                        onClick={() => setIsOpen(false)}
+                                        className={`block py-4 px-6 border-b border-white/10 font-mono text-sm tracking-widest hover:pl-8 transition-all ${isActive(link.path) ? 'text-acid-green' : 'text-gray-300'
+                                            }`}
+                                    >
+                    // {link.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </nav>
+        </>
     );
 };
 
